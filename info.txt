@@ -1,0 +1,6 @@
+Name: Mailing list in your account (список рассылки в вашем аккаунте);
+Version: 1.0.0;
+Support Core: 16.17.18;
+Description: Добавляет в личном кабинете пункт меню "рассылки", где ваши пользователи смогут подписаться или отписаться от ваших рассылок;
+Author: Никитин Леонид;
+Author URI: https://irinauspeshnaya.ru/post-group/korotko-o-sebe-i-kakova-tsel-moego-proekta/;
