@@ -20,7 +20,44 @@ class ESputnik extends BaseService implements ServiceInterface
         return $return;
     }
 
+    /**
+     * Поиск контактов по e-mail
+     *
+     * $email = string
+     *
+     * return object
+     */
+    public static function getSearchContact($email)
+    {
+        $return = self::send('v1/contacts?startindex=1&maxrows=10&email=' . $email);
 
+        return $return;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+    /**
+     *  Получаем по id контакт
+     *
+     * $id = integer
+     *
+     * return object
+     */
+    public static function getContact($id)
+    {
+        $return = self::send('v1/contact/' . $id);
+
+        return $return;
+    }
 
 
 

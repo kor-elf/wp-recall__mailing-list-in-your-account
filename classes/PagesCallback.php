@@ -15,33 +15,30 @@ class PagesCallback
      */
     public static function userMenuTab($userId)
     {
+        rcl_enqueue_style('rcl-chat', rcl_addon_url('static/css/mailing_groups.css', Config::getFileAddon()));
+    	rcl_enqueue_script('rcl-chat', rcl_addon_url('static/js/mailing_groups.js', Config::getFileAddon()));
+
+        $groups = ESputnik::getGroups();
+
+
         /*
         $current_user = wp_get_current_user();
-        $tokens       = Tokens::getToken();
-
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_HEADER, 1);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Accept: application/json', 'Content-Type: application/json'));
-        curl_setopt($ch, CURLOPT_URL, 'https://esputnik.com/api/v2/version');
-        curl_setopt($ch,CURLOPT_USERPWD, $tokens);
-        curl_setopt($ch,CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt ($ch, CURLOPT_SSLVERSION, 6);
-        $output = curl_exec($ch);
-        echo($output);
-        curl_close($ch);
-
-        //print_r($current_user->user_email);
-        */
-
-        echo 555;
-        $groups = ESputnik::getGroups();
+        $groups = ESputnik::getSearchContact($current_user->user_email);
         echo '<pre>';
         print_r($groups);
+        print_r($current_user->first_name);
+        print_r($current_user->last_name);
+        print_r($current_user->display_name);
+        print_r($current_user->user_nicename);
+
         exit;
+        */
 
         $content = rcl_get_include_template('user_menu_tab.php', Config::getDirTemplates(), [
-
+            'groups' => $groups
         ]);
+
+
 
 
         return $content;
