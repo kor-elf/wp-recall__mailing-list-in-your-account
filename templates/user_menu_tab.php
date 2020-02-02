@@ -11,7 +11,7 @@ if (!defined('ABSPATH')) die('No direct access allowed');
         echo '<ul id="list-group-mailing">';
         foreach ($groups as $groupKey => $groupArr) {
 ?>
-            <li id="group-mailing-<?=$groupArr->id;?>"><?=$groupArr->name;?> - <a href="javascript:;" data-id="<?=$groupArr->id;?>">подписаться</a></li>
+            <li id="group-mailing-<?=$groupArr->id;?>"><?=$groupArr->name;?> - <a href="javascript:;" data-id="<?=$groupArr->id;?>" class="list-group-mailing__loading"> </a></li>
 <?php
         }
         echo '</ul>';
