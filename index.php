@@ -19,6 +19,11 @@ if (is_admin()) {
 
 add_filter('init', '\korElf\wpRecall\mailingListInYourAccount\Pages::userMenuTab');
 
+if (defined('DOING_AJAX') && DOING_AJAX) {
+    // Только авторизованные
+    add_action('wp_ajax_gas_callback', '\korElf\wpRecall\mailingListInYourAccount\Ajax::getContactInGroups');
+}
+
 /*
 add_filter( 'pre_update_option', 'filter_function_name_8399', 10, 3 );
 function filter_function_name_8399( $value, $option, $old_value ){
