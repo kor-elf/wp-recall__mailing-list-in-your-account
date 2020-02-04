@@ -17,7 +17,15 @@ function getContactInGroups(rcl)
            dataType: "json",
            data: setData,
            success: function(data) {
-               console.log(data);
+               for (groupId in data) {
+                   jQuery('#group-mailing-' + data[groupId]).find('a.list-group-mailing__loading')
+                   .removeClass('list-group-mailing__loading')
+                   .text('Отписаться');
+               }
+
+               jQuery('#list-group-mailing').find('a.list-group-mailing__loading')
+               .removeClass('list-group-mailing__loading')
+               .text('Подписаться');
            },
            complete: function() {
 
