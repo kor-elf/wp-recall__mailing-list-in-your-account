@@ -11,13 +11,4 @@ interface ServiceInterface
      */
     public static function getGroups();
 
-    /**
-     * Поиск контактов по e-mail
-     *
-     * $email = string
-     *
-     * return object
-     */
-    public static function getSearchContact($email);
-    
 }
