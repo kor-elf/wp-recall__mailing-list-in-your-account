@@ -32,7 +32,7 @@ class Ajax
                     if (!empty($contact) && !empty($contact->groups)) {
 
                         foreach ($contact->groups as $groupKey => $groupObject) {
-                            $data[$groupObject->id] = 1;
+                            $data[] = $groupObject->id;
                         }
 
                     }
