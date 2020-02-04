@@ -18,6 +18,8 @@ class Ajax
 
         $current_user = wp_get_current_user();
         if (!empty($current_user)) {
+            // Потом надо будет реализовать через один метод!!!
+
             // Ищим контакты у которых указана почта пользователя, что бы узнать его ID от сервиса
             $contacts = ESputnik::getSearchContacts($current_user->user_email);
 
