@@ -47,4 +47,48 @@ class Ajax
 
         wp_die();
     }
+
+    /**
+     * Отправляем запрос на отписку в группе
+     */
+    public static function sendUnsubscribeContactInGroup()
+    {
+        // проверка nonce
+        rcl_verify_ajax_nonce();
+
+        $data = ['success' => 0];
+
+        $groupId = intval($_POST['group_id']) ?? 0;
+        if (empty($groupId)) {
+
+            echo json_encode($data);
+
+            wp_die();
+
+        }
+
+        $current_user = wp_get_current_user();
+        if (!empty($current_user)) {
+            // Потом надо будет реализовать через один метод!!!
+
+            // Ищим контакты у которых указана почта пользователя, что бы узнать его ID от сервиса
+            $contacts = ESputnik::getSearchContacts($current_user->user_email);
+
+            if (!empty($contacts)) {
+
+                foreach ($contacts as $contactKey => $contactObject) {
+
+                    // Отписываем контакт с группы
+                    $contact = ESputnik::unsubscribe($contactObject->id, $groupId);
+
+                }
+
+            }
+
+        }
+
+        echo json_encode($data);
+
+        wp_die();
+    }
 }

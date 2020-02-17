@@ -21,7 +21,12 @@ add_filter('init', '\korElf\wpRecall\mailingListInYourAccount\Pages::userMenuTab
 
 if (defined('DOING_AJAX') && DOING_AJAX) {
     // Только авторизованные
-    add_action('wp_ajax_gas_callback', '\korElf\wpRecall\mailingListInYourAccount\Ajax::getContactInGroups');
+
+    // Получаем список групп в которых состоит пользователь
+    add_action('wp_ajax_get_contact_in_groups', '\korElf\wpRecall\mailingListInYourAccount\Ajax::getContactInGroups');
+
+    // Отправляем запрос на отписку в данной группе
+    add_action('wp_ajax_send_unsubscribe_contact_in_group', '\korElf\wpRecall\mailingListInYourAccount\Ajax::sendUnsubscribeContactInGroup');
 }
 
 /*
