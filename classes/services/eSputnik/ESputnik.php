@@ -15,7 +15,18 @@ class ESputnik extends BaseService implements ServiceInterface
      */
     public static function getGroups()
     {
-        $return = self::send('v1/groups');
+        $groups = self::send('v1/groups');
+
+        $return = [];
+        foreach ($groups as $groupKey => $groupArr) {
+
+            // Мы можем управлять только с группами, которые статик.
+            if ($groupArr->type != 'STATIC') {
+                continue;
+            }
+
+            $return[] = $groupArr;
+        }
 
         return $return;
     }
@@ -81,12 +92,21 @@ class ESputnik extends BaseService implements ServiceInterface
         exit;
 */
 
-        $return = self::send('v1/contact/' . $contactId . '/subscriptions', ['subscriptions' => []]);
+        $post = [
+            'contacts' => [
+                'channels' => [
+                    ['type' => 'email', 'value' => 'i@kor-elf.net']
+                ],
+            ],
+            'dedupeOn'          => 'email',
+            //'groupNames' => ['День рождения сегодня']
+            'groupNamesExclude' => ['167255941']
+        ];
 
-        print_r($return);
-        exit;
+        //groupNames
+        //groupNamesExclude
 
-
+        $return = self::send('v1/contacts/', $post);
     }
 
 
@@ -113,7 +133,6 @@ class ESputnik extends BaseService implements ServiceInterface
         if (!empty($post)) {
             curl_setopt($ch, CURLOPT_POST, 1);
         	curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($post));
-            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
         }
 
         curl_setopt($ch, CURLOPT_USERPWD, $tokens);
@@ -121,6 +140,8 @@ class ESputnik extends BaseService implements ServiceInterface
         curl_setopt($ch, CURLOPT_SSLVERSION, 6);
         $output = curl_exec($ch);
         curl_close($ch);
+
+        //print_r($output);
 
         if (empty($output)) {
             return false;
